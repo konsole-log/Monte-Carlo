@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🎯 Monte Carlo PI Estimator
+# Monte Carlo PI Estimator
 
 **A real-time visual simulation that approximates π using randomness and geometry**
 
@@ -13,54 +13,54 @@
 
 ---
 
-## 📖 What Is This?
+## Overview
 
 This project uses the **Monte Carlo method** to estimate the value of **π (pi)** in real time with a visual simulation. Random points are scattered across a square, and the ratio of those landing inside an inscribed circle is used to compute π — all rendered live with Raylib.
 
-> **The idea:** If you randomly throw darts at a square with an inscribed circle, the fraction that land inside the circle ≈ π/4. Scale by 4 and you get π.
+> If you randomly throw darts at a square with an inscribed circle, the fraction that land inside the circle ≈ π/4. Scale by 4 and you get π.
 
 ---
 
-## 🎬 How It Works
+## How It Works
 
 ```
 ┌──────────────────────────┐
-│      ·  ·   · (red)      │
+│      ·  ·   · (outside)  │
 │   ·  ╭──────────╮  ·     │
-│    · │ · (green)│ ·      │
-│      │    ●     │        │
-│    · │  (green) │ ·      │
+│    · │ · (inside)│ ·     │
+│      │     ●    │        │
+│    · │  (inside)│ ·      │
 │      ╰──────────╯        │
-│  ·      ·    ·  (red)    │
+│  ·      ·    ·  (outside)│
 └──────────────────────────┘
    π ≈ 4 × (inside / total)
 ```
 
-1. A **circle** is inscribed inside a **square**
-2. **N random points** are generated uniformly across the square each frame
-3. Points **inside** the circle → 🟢 green | Points **outside** → 🔴 red
-4. **π ≈ 4 × (green points) / (total points)**
+1. A circle is inscribed inside a square
+2. N random points are generated uniformly across the square each frame
+3. Points inside the circle are plotted green; points outside are plotted red
+4. π ≈ 4 × (points inside) / (total points)
 
-The more points, the closer the estimate converges to **3.14159...**
-
----
-
-## ✨ Features
-
-- 🔴🟢 **Live visual rendering** of random point distribution
-- 🎚️ **Interactive slider** — adjust iterations from 100 to 20,000 per frame
-- 📊 **Real-time π estimate** displayed on screen, updated every frame
-- ⚡ **Lightweight** — single C++ file, no heavy dependencies
+The more points generated, the closer the estimate converges to **3.14159...**
 
 ---
 
-## 📁 Project Structure
+## Features
+
+- Live visual rendering of random point distribution
+- Interactive slider — adjust iterations from 100 to 20,000 per frame
+- Real-time π estimate displayed on screen, updated every frame
+- Lightweight — single C++ source file, no heavy dependencies
+
+---
+
+## Project Structure
 
 ```
 Monte-Carlo-main/
 ├── src/
-│   ├── main.cpp       # Simulation logic + Raylib rendering
-│   └── raygui.h       # Single-header GUI library (slider UI) — bundled, no install needed
+│   ├── main.cpp       # Simulation logic and Raylib rendering
+│   └── raygui.h       # Single-header GUI library (bundled, no install needed)
 ├── Makefile           # Linux/macOS build script
 ├── app                # Pre-compiled Linux binary
 └── .gitignore
@@ -68,9 +68,9 @@ Monte-Carlo-main/
 
 ---
 
-## 🛠️ Building & Running
+## Building and Running
 
-### 🐧 Linux / macOS
+### Linux / macOS
 
 **Install Raylib:**
 
@@ -97,63 +97,63 @@ g++ src/main.cpp -o app -Isrc -lraylib -lGL -lm -lpthread -ldl -lrt -lX11 -std=c
 
 ---
 
-### 🪟 Windows (MSYS2 — Recommended)
+### Windows — MSYS2 (Recommended)
 
-> ⚠️ The `Makefile` links Linux-only libraries and **will not work on Windows**. Use the steps below instead.
+> Note: The `Makefile` links Linux-only libraries and will not work on Windows. Use the steps below instead.
 
-**Step 1 — Install [MSYS2](https://www.msys2.org)** and open the **MinGW64** terminal
+**1. Install [MSYS2](https://www.msys2.org) and open the MinGW64 terminal**
 
-**Step 2 — Install dependencies:**
+**2. Install dependencies:**
 
 ```bash
 pacman -Syu
 pacman -S mingw-w64-x86_64-gcc mingw-w64-x86_64-raylib
 ```
 
-**Step 3 — Navigate to the project folder:**
+**3. Navigate to the project folder:**
 
 ```bash
 cd Monte-Carlo-main
 ```
 
-**Step 4 — Compile:**
+**4. Compile:**
 
 ```bash
 g++ src/main.cpp -o MonteCarloPI -Isrc -lraylib -lopengl32 -lgdi32 -lwinmm -std=c++17
 ```
 
-**Step 5 — Run:**
+**5. Run:**
 
 ```bash
 ./MonteCarloPI.exe
 ```
 
-> **Why different flags?** On Windows, `-lGL -lX11` are replaced with `-lopengl32 -lgdi32 -lwinmm` — the Windows equivalents for OpenGL and windowing.
+> On Windows, `-lGL -lX11` are replaced with `-lopengl32 -lgdi32 -lwinmm` — the Windows equivalents for OpenGL and windowing.
 
 ---
 
-### 🪟 Windows (Visual Studio + vcpkg)
+### Windows — Visual Studio + vcpkg
 
 ```bash
 vcpkg install raylib
 ```
 
-Then create a project, add `src/main.cpp`, and link against raylib via vcpkg integration.
+Create a project, add `src/main.cpp`, and link against raylib via vcpkg integration.
 
 ---
 
-## 🎮 Controls
+## Controls
 
 | Control | Description |
 |---|---|
-| **Slider** (top-left) | Drag to set iterations per frame (100 – 20,000) |
-| **PI display** (top-left) | Live π estimate, updates every frame |
-| **Iterations display** | Shows current iteration count |
-| **Close / `Esc`** | Exit the simulation |
+| Slider (top-left) | Drag to set iterations per frame (100 – 20,000) |
+| PI display (top-left) | Live π estimate, updates every frame |
+| Iterations display | Shows the current iteration count |
+| Close / `Esc` | Exit the simulation |
 
 ---
 
-## 🔧 Compiler Flags Reference
+## Compiler Flags Reference
 
 | Flag | Purpose |
 |---|---|
@@ -166,16 +166,16 @@ Then create a project, add `src/main.cpp`, and link against raylib via vcpkg int
 
 ---
 
-## ❓ Troubleshooting
+## Troubleshooting
 
 <details>
 <summary><b>raylib.h: No such file or directory</b></summary>
 
 Raylib is not installed or not on the include path.
 
-- **MSYS2:** `pacman -S mingw-w64-x86_64-raylib`
-- **Ubuntu:** `sudo apt install libraylib-dev`
-- Make sure you're in the **MinGW64** terminal (not plain MSYS2) on Windows
+- MSYS2: `pacman -S mingw-w64-x86_64-raylib`
+- Ubuntu: `sudo apt install libraylib-dev`
+- On Windows, make sure you are in the MinGW64 terminal, not the plain MSYS2 shell
 
 </details>
 
@@ -185,8 +185,11 @@ Raylib is not installed or not on the include path.
 Ensure all `-l` flags are present and in the correct order. Keep `-lraylib` before the system libraries:
 
 ```bash
--lraylib -lopengl32 -lgdi32 -lwinmm   # Windows
--lraylib -lGL -lm -lpthread -ldl -lrt -lX11   # Linux
+# Windows
+-lraylib -lopengl32 -lgdi32 -lwinmm
+
+# Linux
+-lraylib -lGL -lm -lpthread -ldl -lrt -lX11
 ```
 
 </details>
@@ -195,13 +198,14 @@ Ensure all `-l` flags are present and in the correct order. Keep `-lraylib` befo
 <summary><b>Window is blank or crashes immediately</b></summary>
 
 Your GPU drivers may not support the required OpenGL version. Try:
+
 1. Update your graphics drivers
-2. Add `-DGRAPHICS_API_OPENGL_21` to force OpenGL 2.1 compatibility mode
+2. Add `-DGRAPHICS_API_OPENGL_21` to the compile command to force OpenGL 2.1 compatibility mode
 
 </details>
 
 <details>
-<summary><b>make doesn't work on Windows</b></summary>
+<summary><b>make does not work on Windows</b></summary>
 
 Expected — the `Makefile` uses Linux-only library flags. Use the manual `g++` command in the Windows section above.
 
@@ -209,32 +213,32 @@ Expected — the `Makefile` uses Linux-only library flags. Use the manual `g++` 
 
 ---
 
-## 📚 Dependencies
+## Dependencies
 
 | Dependency | Version | Notes |
 |---|---|---|
-| **g++ / MinGW-w64** | ≥ 9.0 | C++17 support required |
-| **Raylib** | ≥ 4.0 | Graphics & windowing |
-| **raygui.h** | Bundled | Already in `src/` — no install needed |
+| g++ / MinGW-w64 | >= 9.0 | C++17 support required |
+| Raylib | >= 4.0 | Graphics and windowing |
+| raygui.h | Bundled | Already in `src/` — no install needed |
 
 ---
 
-## 🧮 The Math
+## The Math
 
-The Monte Carlo method exploits a geometric probability:
+The Monte Carlo method exploits a simple geometric probability:
 
-$$\frac{\text{Area of circle}}{\text{Area of square}} = \frac{\pi r^2}{(2r)^2} = \frac{\pi}{4}$$
+```
+Area of circle / Area of square = (π r²) / (2r)² = π / 4
+```
 
-So:
+Therefore:
 
-$$\pi \approx 4 \times \frac{\text{points inside circle}}{\text{total points}}$$
+```
+π ≈ 4 × (points inside circle) / (total points)
+```
 
-As the number of random samples → ∞, the estimate → π.
+As the number of random samples increases, the estimate converges to π.
 
 ---
 
-<div align="center">
-
-Made with ❤️ and randomness &nbsp;|&nbsp; Built with [Raylib](https://www.raylib.com)
-
-</div>
+Built with [Raylib](https://www.raylib.com)/div>
