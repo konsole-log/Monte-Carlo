@@ -241,4 +241,4 @@ As the number of random samples increases, the estimate converges to π.
 
 ---
 
-Built with [Raylib](https://www.raylib.com)/div>
+Built with [Raylib](https://www.raylib.com)
