@@ -1,9 +1,9 @@
-#include "raylib.h"
+#include <raylib.h>
 #define RAYGUI_IMPLEMENTATION
-#include "raygui.h"
 #include <cstddef>
 #include <cstdlib>
 #include <ctime>
+#include <raygui.h>
 const float circle_radius = 200.0f;
 const float square_length = 2 * circle_radius;
 const float screen_height = 450;
@@ -33,11 +33,9 @@ int main() {
     GuiSlider((Rectangle){20.0f, 50.0f, 100, 20}, "100", "20000", &num_itr, 100,
               20000);
     int itr = (int)num_itr;
-
     DrawText(TextFormat("Iterations: %d", itr), 10, 30, 10, WHITE);
     DrawText(TextFormat("PI=%.6f", pi), 10, 10, 10, WHITE);
-
-    for (size_t i = 0; i < itr; i++) {
+    for (int i = 0; i < itr; i++) {
       Vector2 points;
       points.x = (float)rand() / RAND_MAX * square_length;
       points.y = (float)rand() / RAND_MAX * square_length;
